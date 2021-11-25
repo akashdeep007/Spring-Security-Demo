@@ -17,9 +17,14 @@
 	<security:authentication property="principal.authorities" />
 	<br>
 	<br>
-	
-	<a href="${pageContext.request.contextPath}/leader">Only for Managers</a>
-	<a href="${pageContext.request.contextPath}/admin">Only for Admin</a>
+	<security:authorize access="hasRole('MANAGER')">
+		<a href="${pageContext.request.contextPath}/leader">Only for
+			Managers</a>
+	</security:authorize>
+	<security:authorize access="hasRole('ADMIN')">
+	<<a href="${pageContext.request.contextPath}/admin">Only for Admin</a>
+	</security:authorize>
+
 	<form:form action="${pageContext.request.contextPath}/logout"
 		method="POST">
 		<input type="submit" value="logout" />
